@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News App</title>
+    <link rel="stylesheet" href="{% static 'news/styles.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <h1 class="navbar-title">📰 Top Headlines</h1>
+    </nav>
+
+    <div class="container">
+        <div class="articles-grid">
+            {% for article in articles %}
+                <div class="article-card">
+                    {% if article.urlToImage %}
+                        <img src="{{ article.urlToImage }}" alt="{{ article.title }}" class="article-image">
+                    {% else %}
+                        <div class="no-image">No image available</div>
+                    {% endif %}
+                    <div class="article-body">
+                        <h3 class="article-title">{{article.title}}</h3>
+                        <p class="article-description">{{article.description}}</p>
+                        <a href="{{ article.url}}" class="read-more" target="_blank">Read more →</a>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="no-news">No News Found Today</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
