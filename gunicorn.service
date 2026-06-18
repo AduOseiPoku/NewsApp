@@ -1,0 +1,12 @@
+[Unit]
+Description=Gunicorn daemon for Django NewsApp
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/NewsApp
+ExecStart=/home/ubuntu/NewsApp/env/bin/gunicorn --workers 3 --bind 127.0.0.1:8000 core.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
